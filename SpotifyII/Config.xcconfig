@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  SpotifyII
+//
+//  Created by BKS-GGS on 20/04/22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+clientId = 4ce9a15680a542279597e9a35d56dda2
+clientSecret = 421383d697074d0da919e496508eeea6
