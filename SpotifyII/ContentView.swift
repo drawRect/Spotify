@@ -16,7 +16,12 @@ enum TabBarItem {
 struct ContentView: View {
     @EnvironmentObject private var authentication: AuthViewModel
     @Environment(\.appState) private var appState
-
+    @ObservedObject private var loadingIndicatorViewModel: LoadingIndicatorViewModel
+    
+    init(loadingIndicatorViewModel: LoadingIndicatorViewModel) {
+        self.loadingIndicatorViewModel = loadingIndicatorViewModel
+    }
+    
     var body: some View {
         tabBarView()
     }
@@ -38,10 +43,10 @@ struct ContentView: View {
         }
         .onAppear {
             let appearance = UITabBarAppearance()
-
+            
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = UIColor.secondarySystemBackground
-
+            
             UITabBar.appearance().standardAppearance = appearance
             if #available(iOS 15.0, *) {
                 UITabBar.appearance().scrollEdgeAppearance = appearance
@@ -69,6 +74,6 @@ struct ContentView: View {
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(loadingIndicatorViewModel: LoadingIndicatorViewModel(displayedText: "Loading...", isLoading: true, color: Color.red))
     }
 }

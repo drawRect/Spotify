@@ -55,7 +55,7 @@ extension HomeFetcher: HomeFetchable {
     }
     
     var token: String {
-        ""
+        
     }
     
     enum HTTPMethod: String {

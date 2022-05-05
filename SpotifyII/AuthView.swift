@@ -22,7 +22,7 @@ struct AuthView: View {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         let loginFetcher = AuthFetcher()
         let viewModel = AuthViewModel(loginFetcher: loginFetcher)

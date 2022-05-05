@@ -16,10 +16,11 @@ struct SpotifyIIApp: SwiftUI.App {
             Group {
                 switch authenticationModel.authenticationState {
                 case .unauthenticated:
-//                    AuthView(viewModel: authenticationModel)
-                    HomeView()
+                    AuthView(viewModel: authenticationModel)
                 case .authenticated:
-                    ContentView()
+                    ContentView(loadingIndicatorViewModel: LoadingIndicatorViewModel(displayedText: "Loading...",
+                                                          isLoading: true,
+                                                          color: Color.teal))
                         .modifier(AppPhaseModifier())
                 }
             }

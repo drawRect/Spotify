@@ -18,7 +18,9 @@ class AuthViewModel: ObservableObject {
     private let loginFetcher: AuthFetchable
     private var disposables = Set<AnyCancellable>()
     
-    @Published var authenticationState: AuthenticationState = .unauthenticated
+    @Published var authenticationState: AuthenticationState = {
+        AuthManager.shared.isSignedIn ? .authenticated : .unauthenticated
+    }()
     @Published var selectedTab: TabBarItem = .home
     @Published var authResponse: AuthResponse?
     

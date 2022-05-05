@@ -7,7 +7,7 @@
 
 import Foundation
 
-// This is going to be deprecated. Avoid Singleton. and follow SOLID
+/// This is going to be deprecated. Avoid Singleton. and follow SOLID
 
 final class AuthManager {
     static let shared = AuthManager()
@@ -110,13 +110,13 @@ final class AuthManager {
         }
     }
     
-  //completionHandler is not mandatory thats why we made it as optional
+    //completionHandler is not mandatory thats why we made it as optional
     public func refreshIfNeeded(completion: ((Bool) -> Void)?) {
         guard !refreshingToken else {
             return
         }
         guard shouldRefreshToken else {
-          completion?(true)
+            completion?(true)
             return
         }
         guard let refreshToken = self.refreshToken else {
@@ -153,7 +153,7 @@ final class AuthManager {
         URLSession.shared.dataTask(with: request) { [weak self] (data, _, error) in
             self?.refreshingToken = false
             guard let data = data, error == nil else {
-              completion?(false)
+                completion?(false)
                 return
             }
             
@@ -180,11 +180,11 @@ final class AuthManager {
         let expiresIn = Date().addingTimeInterval(TimeInterval(authInfo.expiresIn))
         UserDefaultsHelper.setData(value: expiresIn, key: .expiresIn)
     }
-  
-  public func signout(completion: (Bool) -> Void) {
-    UserDefaults.standard.setValue(nil, forKey: "accessToken")
-    UserDefaults.standard.setValue(nil, forKey: "refreshToken")
-    UserDefaults.standard.setValue(nil, forKey: "expiresIn")
-    completion(true)
-  }
+    
+    public func signout(completion: (Bool) -> Void) {
+        UserDefaults.standard.setValue(nil, forKey: "accessToken")
+        UserDefaults.standard.setValue(nil, forKey: "refreshToken")
+        UserDefaults.standard.setValue(nil, forKey: "expiresIn")
+        completion(true)
+    }
 }
