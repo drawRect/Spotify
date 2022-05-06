@@ -52,7 +52,7 @@ class AuthViewModel: ObservableObject {
                 case .finished: break
                 }
             }, receiveValue: {[weak self] auth in
-                guard let self = self else { return}
+                guard let self = self else { return }
                 self.authResponse = auth
                 self.authenticationState = .authenticated
                 completion(auth)

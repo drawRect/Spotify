@@ -28,7 +28,7 @@ struct ContentView: View {
     
     @ViewBuilder private func tabBarView() -> some View {
         TabView(selection: $authentication.selectedTab) {
-            HomeView()
+            HomeView(viewModel: HomeViewModel(homeFetcher: HomeFetcher()))
                 .tabItem { Label("Home", systemImage: "house.fill") }
                 .tag(TabBarItem.home)
             

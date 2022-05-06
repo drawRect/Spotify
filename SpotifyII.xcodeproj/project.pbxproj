@@ -32,9 +32,14 @@
 		6FB460CA2821664B00E1BC10 /* NewReleasesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB460C92821664B00E1BC10 /* NewReleasesResponse.swift */; };
 		6FB460CD282172CC00E1BC10 /* APIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB460CB282172CC00E1BC10 /* APIImage.swift */; };
 		6FB460CE282172CC00E1BC10 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB460CC282172CC00E1BC10 /* Artist.swift */; };
+		6FB4F11D2825AA0E00F59878 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB4F11C2825AA0E00F59878 /* SDWebImageSwiftUI */; };
 		6FB87A5B282393770061DE68 /* RecommededPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A5A282393770061DE68 /* RecommededPlaylistView.swift */; };
 		6FB87A63282395960061DE68 /* LoadingIndicatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A60282395960061DE68 /* LoadingIndicatorViewModel.swift */; };
 		6FB87A64282395960061DE68 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A62282395960061DE68 /* LoadingIndicatorView.swift */; };
+		6FB87A6B2823ACAA0061DE68 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A6A2823ACAA0061DE68 /* HomeViewModel.swift */; };
+		6FB87A6D2823D7AF0061DE68 /* NewReleasesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A6C2823D7AF0061DE68 /* NewReleasesCellViewModel.swift */; };
+		6FB87A6F2823DD720061DE68 /* FeaturedPlaylistCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A6E2823DD720061DE68 /* FeaturedPlaylistCellViewModel.swift */; };
+		6FB87A712823DD880061DE68 /* RecommendedTrackCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB87A702823DD880061DE68 /* RecommendedTrackCellViewModel.swift */; };
 		6FCDEE9A282280FA005F8E8F /* NewReleaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCDEE99282280FA005F8E8F /* NewReleaseCellView.swift */; };
 		6FCDEE9C2822815C005F8E8F /* NewReleasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCDEE9B2822815C005F8E8F /* NewReleasesView.swift */; };
 		6FCDEE9E282281AA005F8E8F /* FeaturedPlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCDEE9D282281AA005F8E8F /* FeaturedPlaylistsView.swift */; };
@@ -92,6 +97,10 @@
 		6FB87A5A282393770061DE68 /* RecommededPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommededPlaylistView.swift; sourceTree = "<group>"; };
 		6FB87A60282395960061DE68 /* LoadingIndicatorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewModel.swift; sourceTree = "<group>"; };
 		6FB87A62282395960061DE68 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
+		6FB87A6A2823ACAA0061DE68 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		6FB87A6C2823D7AF0061DE68 /* NewReleasesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCellViewModel.swift; sourceTree = "<group>"; };
+		6FB87A6E2823DD720061DE68 /* FeaturedPlaylistCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistCellViewModel.swift; sourceTree = "<group>"; };
+		6FB87A702823DD880061DE68 /* RecommendedTrackCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTrackCellViewModel.swift; sourceTree = "<group>"; };
 		6FCDEE99282280FA005F8E8F /* NewReleaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleaseCellView.swift; sourceTree = "<group>"; };
 		6FCDEE9B2822815C005F8E8F /* NewReleasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesView.swift; sourceTree = "<group>"; };
 		6FCDEE9D282281AA005F8E8F /* FeaturedPlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistsView.swift; sourceTree = "<group>"; };
@@ -103,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB4F11D2825AA0E00F59878 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,9 +162,13 @@
 				6FA73E6E2811E4D100613BB8 /* ContentView.swift */,
 				6FA73E762811EBB900613BB8 /* View+AppState.swift */,
 				6FA73E702811E65300613BB8 /* HomeView.swift */,
+				6FB87A6A2823ACAA0061DE68 /* HomeViewModel.swift */,
 				6FCDEE9D282281AA005F8E8F /* FeaturedPlaylistsView.swift */,
 				6FCDEE9F282281BF005F8E8F /* FeaturedPlaylistCellView.swift */,
 				6FCDEE9B2822815C005F8E8F /* NewReleasesView.swift */,
+				6FB87A6C2823D7AF0061DE68 /* NewReleasesCellViewModel.swift */,
+				6FB87A6E2823DD720061DE68 /* FeaturedPlaylistCellViewModel.swift */,
+				6FB87A702823DD880061DE68 /* RecommendedTrackCellViewModel.swift */,
 				6FCDEE99282280FA005F8E8F /* NewReleaseCellView.swift */,
 				6FB87A5A282393770061DE68 /* RecommededPlaylistView.swift */,
 				6FA73E722811E6FB00613BB8 /* SearchView.swift */,
@@ -246,6 +260,9 @@
 			dependencies = (
 			);
 			name = SpotifyII;
+			packageProductDependencies = (
+				6FB4F11C2825AA0E00F59878 /* SDWebImageSwiftUI */,
+			);
 			productName = SpotifyII;
 			productReference = 6F8BFCA7280F5ED700F8E12B /* SpotifyII.app */;
 			productType = "com.apple.product-type.application";
@@ -318,6 +335,9 @@
 				Base,
 			);
 			mainGroup = 6F8BFC9E280F5ED700F8E12B;
+			packageReferences = (
+				6FB4F11B2825AA0E00F59878 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = 6F8BFCA8280F5ED700F8E12B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -374,15 +394,19 @@
 				6FB460CA2821664B00E1BC10 /* NewReleasesResponse.swift in Sources */,
 				6F8BFCAD280F5ED700F8E12B /* AuthView.swift in Sources */,
 				6FCDEE9C2822815C005F8E8F /* NewReleasesView.swift in Sources */,
+				6FB87A6F2823DD720061DE68 /* FeaturedPlaylistCellViewModel.swift in Sources */,
 				6F8BFCDB280F6D5D00F8E12B /* AuthResponse.swift in Sources */,
 				6FA73E732811E6FB00613BB8 /* SearchView.swift in Sources */,
 				6FB87A5B282393770061DE68 /* RecommededPlaylistView.swift in Sources */,
 				6FB460C82821656D00E1BC10 /* HomeFetcher.swift in Sources */,
 				6F8BFCE1280F722700F8E12B /* MyError.swift in Sources */,
+				6FB87A712823DD880061DE68 /* RecommendedTrackCellViewModel.swift in Sources */,
+				6FB87A6D2823D7AF0061DE68 /* NewReleasesCellViewModel.swift in Sources */,
 				6FA73E6F2811E4D100613BB8 /* ContentView.swift in Sources */,
 				6FA73E752811E70700613BB8 /* LibraryView.swift in Sources */,
 				6FB87A64282395960061DE68 /* LoadingIndicatorView.swift in Sources */,
 				6FB87A63282395960061DE68 /* LoadingIndicatorViewModel.swift in Sources */,
+				6FB87A6B2823ACAA0061DE68 /* HomeViewModel.swift in Sources */,
 				6FCDEE9E282281AA005F8E8F /* FeaturedPlaylistsView.swift in Sources */,
 				6FB460CE282172CC00E1BC10 /* Artist.swift in Sources */,
 				6FCDEEA0282281BF005F8E8F /* FeaturedPlaylistCellView.swift in Sources */,
@@ -708,6 +732,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6FB4F11B2825AA0E00F59878 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6FB4F11C2825AA0E00F59878 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FB4F11B2825AA0E00F59878 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6F8BFC9F280F5ED700F8E12B /* Project object */;
 }

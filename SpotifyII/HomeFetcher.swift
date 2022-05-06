@@ -23,7 +23,8 @@ class HomeFetcher {
 extension HomeFetcher: HomeFetchable {
     
     var request: URLRequest? {
-        guard let url = URL(string: "https://api.spotify.com/v1" + "/browse/new-releases?limit=50") else {
+        guard let url = URL(string: "https://api.spotify.com/v1" + "/browse/new-releases?limit=50"),
+              let token = token else {
             return nil
         }
         var request = URLRequest(url: url)
@@ -54,14 +55,8 @@ extension HomeFetcher: HomeFetchable {
             .eraseToAnyPublisher()
     }
     
-    var token: String {
-        
+    var token: String? {
+        UserDefaultsHelper.getData(type: String.self, forKey: .accessToken)
     }
     
-    enum HTTPMethod: String {
-        case GET
-        case POST
-        case DELETE
-        case PUT
-    }
 }
