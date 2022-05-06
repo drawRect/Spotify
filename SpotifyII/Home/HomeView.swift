@@ -39,9 +39,20 @@ struct HomeView: View {
                     return
                 }
                 let newAlbums = response.albums.items
-//                NewReleasesView(newReleaseVM: NewReleasesCellViewModel(name: response., artworkURL: <#T##URL?#>, numberOfTracks: <#T##Int#>, artistName: <#T##String#>))
                 
-                selectedSection = .newReleases(viewModels: newAlbums.compactMap({NewReleasesCellViewModel(name: $0.name, artworkURL: URL(string: $0.images.first?.url ?? ""), numberOfTracks: $0.total_tracks, artistName: $0.artists.first?.name ?? "")}))
+                selectedSection = .newReleases(viewModels: newAlbums.compactMap { NewReleasesCellViewModel(name: $0.name, artworkURL: URL(string: $0.images.first?.url ?? ""), numberOfTracks: $0.total_tracks, artistName: $0.artists.first?.name ?? "")})
+                viewModel.sections.append(selectedSection)
+            }
+            
+            viewModel.requestFeaturedPlaylists { response in
+                guard let response = response else {
+                    return
+                }
+                let playlists = response.playlists.items
+                
+                selectedSection = .featuredPlaylists(viewModels: playlists.compactMap({FeaturedPlaylistCellViewModel(name: $0.name, artworkURL:URL(string: $0.images.first?.url ?? "") , creatorName: $0.owner.display_name)
+                }))
+
                 viewModel.sections.append(selectedSection)
             }
         }
@@ -55,8 +66,12 @@ struct HomeView: View {
             } else {
                 NewReleasesView(newReleaseVM:  vm)
             }
-        case .featuredPlaylists:
-            FeaturedPlaylistsView()
+        case .featuredPlaylists(let vm):
+            if vm.isEmpty {
+                LoadingIndicatorView(viewModel: LoadingIndicatorViewModel(displayedText: "Loading...", isLoading: true, color: Color.teal))
+            } else {
+                FeaturedPlaylistsView(vm: vm)
+            }
         case .recommendedTracks:
             RecommededPlaylistView()
         }

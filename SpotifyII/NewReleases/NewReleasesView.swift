@@ -13,10 +13,9 @@ struct NewReleasesView: View {
         self.newReleaseVM = newReleaseVM
     }
     private var columns = [
-        GridItem(.flexible())
-//        GridItem(.adaptive(minimum: 300), spacing: 0),
-//        GridItem(.adaptive(minimum: 200), spacing: 0),
-//        GridItem(.adaptive(minimum: 200), spacing: 0)
+        GridItem(.adaptive(minimum: 200), spacing: 0),
+        GridItem(.adaptive(minimum: 200), spacing: 0),
+        GridItem(.adaptive(minimum: 200), spacing: 0)
     ]
     
     var body: some View {
@@ -24,7 +23,6 @@ struct NewReleasesView: View {
             ScrollView {
                 LazyVGrid(
                     columns: columns,
-                    alignment: .leading,
                     spacing: 0
                 ) {
                     ForEach(newReleaseVM, id: \.self) { model in

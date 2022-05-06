@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct SpotifyIIApp: SwiftUI.App {
     @StateObject var authenticationModel: AuthViewModel = AuthViewModel(loginFetcher: AuthFetcher())
-
+    
     var body: some Scene {
         WindowGroup {
             Group {
@@ -18,10 +18,14 @@ struct SpotifyIIApp: SwiftUI.App {
                 case .unauthenticated:
                     AuthView(viewModel: authenticationModel)
                 case .authenticated:
-                    ContentView(loadingIndicatorViewModel: LoadingIndicatorViewModel(displayedText: "Loading...",
-                                                          isLoading: true,
-                                                          color: Color.teal))
-                        .modifier(AppPhaseModifier())
+                    ContentView(
+                        loadingIndicatorViewModel: LoadingIndicatorViewModel(
+                            displayedText: "Loading...",
+                            isLoading: true,
+                            color: Color.teal
+                        )
+                    )
+                    .modifier(AppPhaseModifier())
                 }
             }
             .environmentObject(authenticationModel)

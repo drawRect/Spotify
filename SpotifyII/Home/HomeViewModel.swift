@@ -63,4 +63,22 @@ class HomeViewModel: ObservableObject {
             .store(in: &disposables)
     }
     
+    func requestFeaturedPlaylists(completion: @escaping ((FeaturedPlaylistsResponse?) -> Void)) {
+        homeFetcher.getFeaturedPlaylists()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {[weak self] value in
+                guard self != nil else { return }
+                switch value {
+                case .failure:
+                    completion(nil)
+                case .finished: break
+                }
+            }, receiveValue: {[weak self] resp in
+                guard self != nil else { return }
+                completion(resp)
+            })
+            .store(in: &disposables)
+    }
+    
+    
 }

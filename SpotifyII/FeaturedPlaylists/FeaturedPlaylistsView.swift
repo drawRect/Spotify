@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct FeaturedPlaylistsView: View {
+    let vm: [FeaturedPlaylistCellViewModel]
+    init(vm: [FeaturedPlaylistCellViewModel]) {
+        self.vm = vm
+    }
     private var columns = [
         GridItem(.adaptive(minimum: 200), spacing: 0),
         GridItem(.adaptive(minimum: 200), spacing: 0),
@@ -21,8 +25,8 @@ struct FeaturedPlaylistsView: View {
                     columns: columns,
                     spacing: 0
                 ) {
-                    ForEach(0...30, id: \.self) { _ in
-                        FeaturedPlaylistCellView()
+                    ForEach(vm, id: \.self) { 
+                        FeaturedPlaylistCellView(cellModel: $0)
                     }
                 }
             }
@@ -30,9 +34,9 @@ struct FeaturedPlaylistsView: View {
     }
 }
 
-struct FeaturedPlaylistsView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeaturedPlaylistsView()
-            .previewDevice("iPhone 13 Pro Max")
-    }
-}
+//struct FeaturedPlaylistsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FeaturedPlaylistsView()
+//            .previewDevice("iPhone 13 Pro Max")
+//    }
+//}

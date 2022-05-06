@@ -10,6 +10,7 @@ import Combine
 
 protocol HomeFetchable {
     func getNewReleases() -> AnyPublisher<NewReleasesResponse, MyError>
+    func getFeaturedPlaylists() -> AnyPublisher<FeaturedPlaylistsResponse, MyError>
 }
 
 class HomeFetcher {
@@ -22,8 +23,8 @@ class HomeFetcher {
 
 extension HomeFetcher: HomeFetchable {
     
-    var request: URLRequest? {
-        guard let url = URL(string: "https://api.spotify.com/v1" + "/browse/new-releases?limit=50"),
+    private func request(with endpoint: String) -> URLRequest? {
+        guard let url = URL(string: endpoint),
               let token = token else {
             return nil
         }
@@ -34,8 +35,16 @@ extension HomeFetcher: HomeFetchable {
         return request
     }
     
+    private var newReleasesEndPoint: String {
+        "https://api.spotify.com/v1" + "/browse/new-releases?limit=50"
+    }
+    
+    private var featuredPlaylistsEndPoint: String {
+        "https://api.spotify.com/v1" + "/browse/featured-playlists?limit=20"
+    }
+    
     func getNewReleases() -> AnyPublisher<NewReleasesResponse, MyError> {
-        requestNewReleases(with: request)
+        requestNewReleases(with: request(with: newReleasesEndPoint))
     }
     
     private func requestNewReleases<T>(with request: URLRequest?) -> AnyPublisher<T, MyError> where T: Decodable {
@@ -53,6 +62,10 @@ extension HomeFetcher: HomeFetchable {
                 decode(pair.data)
             }
             .eraseToAnyPublisher()
+    }
+    
+    func getFeaturedPlaylists() -> AnyPublisher<FeaturedPlaylistsResponse, MyError> {
+        requestNewReleases(with: request(with: featuredPlaylistsEndPoint))
     }
     
     var token: String? {
