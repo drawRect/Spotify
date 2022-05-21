@@ -11,6 +11,7 @@ import Combine
 protocol HomeFetchable {
     func getNewReleases() -> AnyPublisher<NewReleasesResponse, MyError>
     func getFeaturedPlaylists() -> AnyPublisher<FeaturedPlaylistsResponse, MyError>
+    func getRecommendataions() -> AnyPublisher<RecommendationsResponse, MyError>
 }
 
 class HomeFetcher {
@@ -43,11 +44,23 @@ extension HomeFetcher: HomeFetchable {
         "https://api.spotify.com/v1" + "/browse/featured-playlists?limit=20"
     }
     
-    func getNewReleases() -> AnyPublisher<NewReleasesResponse, MyError> {
-        requestNewReleases(with: request(with: newReleasesEndPoint))
+    private var recomendedGenreEndPoint: String {
+        "https://api.spotify.com/v1" + "/recommendations/available-genre-seeds"
     }
     
-    private func requestNewReleases<T>(with request: URLRequest?) -> AnyPublisher<T, MyError> where T: Decodable {
+    func getNewReleases() -> AnyPublisher<NewReleasesResponse, MyError> {
+        requestData(with: request(with: newReleasesEndPoint))
+    }
+    
+    func getFeaturedPlaylists() -> AnyPublisher<FeaturedPlaylistsResponse, MyError> {
+        requestData(with: request(with: featuredPlaylistsEndPoint))
+    }
+    
+    func getRecommendataions() -> AnyPublisher<RecommendationsResponse, MyError> {
+        requestData(with: request(with: recomendedGenreEndPoint))
+    }
+    
+    private func requestData<T>(with request: URLRequest?) -> AnyPublisher<T, MyError> where T: Decodable {
         guard let urlRequest = request else {
             let error = MyError.network(description: "Couldn't create URL")
             return Fail(error: error)
@@ -62,10 +75,6 @@ extension HomeFetcher: HomeFetchable {
                 decode(pair.data)
             }
             .eraseToAnyPublisher()
-    }
-    
-    func getFeaturedPlaylists() -> AnyPublisher<FeaturedPlaylistsResponse, MyError> {
-        requestNewReleases(with: request(with: featuredPlaylistsEndPoint))
     }
     
     var token: String? {

@@ -14,16 +14,24 @@ struct HomeView: View {
         self.viewModel = viewModel
     }
     
-    @State private var selectedSection: HomeSectionType = .newReleases(viewModels: [])
     
     var body: some View {
         VStack {
-            Picker(
-                "", selection: $selectedSection
-            ) {
-                ForEach(viewModel.sections, id: \.title) {
-                    Text($0.title)
-                        .font(.system(size: 22, weight: .thin))
+            Picker("", selection: $viewModel.selectedSection) {
+                ForEach(viewModel.sections, id: \.self) { value in
+                    Text(value.title)
+                        .tag(value)
+                }
+            }
+            .onChange(of: viewModel.selectedSection) { selected in
+                switch selected {
+                case .newReleases:
+                    viewModel.requestNewReleases()
+                    break
+                case .featuredPlaylists:
+                    viewModel.requestFeaturedPlaylists()
+                    break
+                case .recommendedTracks: break
                 }
             }
             .pickerStyle(.segmented)
@@ -34,47 +42,38 @@ struct HomeView: View {
         }
         .padding()
         .onAppear {
-            viewModel.requestNewReleases { response in
-                guard let response = response else {
-                    return
-                }
-                let newAlbums = response.albums.items
-                
-                selectedSection = .newReleases(viewModels: newAlbums.compactMap { NewReleasesCellViewModel(name: $0.name, artworkURL: URL(string: $0.images.first?.url ?? ""), numberOfTracks: $0.total_tracks, artistName: $0.artists.first?.name ?? "")})
-                viewModel.sections.append(selectedSection)
-            }
-            
-            viewModel.requestFeaturedPlaylists { response in
-                guard let response = response else {
-                    return
-                }
-                let playlists = response.playlists.items
-                
-                selectedSection = .featuredPlaylists(viewModels: playlists.compactMap({FeaturedPlaylistCellViewModel(name: $0.name, artworkURL:URL(string: $0.images.first?.url ?? "") , creatorName: $0.owner.display_name)
-                }))
-
-                viewModel.sections.append(selectedSection)
-            }
+            viewModel.requestNewReleases()
+            viewModel.requestFeaturedPlaylists()
+            viewModel.requestRecommendataions()
         }
     }
     
     @ViewBuilder private func getSelectedSectionView() -> some View {
-        switch selectedSection {
-        case .newReleases(let vm):
-            if vm.isEmpty {
-                LoadingIndicatorView(viewModel: LoadingIndicatorViewModel(displayedText: "Loading...", isLoading: true, color: Color.teal))
+        switch viewModel.selectedSection {
+        case .newReleases:
+            if ((viewModel.newData[.newReleases]?.isEmpty) == nil) {
+                lodingIndicatorView
             } else {
-                NewReleasesView(newReleaseVM:  vm)
+                NewReleasesView(newReleaseVM:  viewModel.newData[.newReleases] as! [NewReleasesCellViewModel])
             }
-        case .featuredPlaylists(let vm):
-            if vm.isEmpty {
-                LoadingIndicatorView(viewModel: LoadingIndicatorViewModel(displayedText: "Loading...", isLoading: true, color: Color.teal))
+        case .featuredPlaylists:
+            if ((viewModel.newData[.featuredPlaylists]?.isEmpty) == nil) {
+                lodingIndicatorView
             } else {
-                FeaturedPlaylistsView(vm: vm)
+                FeaturedPlaylistsView(vm: viewModel.newData[.featuredPlaylists] as! [FeaturedPlaylistCellViewModel])
             }
         case .recommendedTracks:
-            RecommededPlaylistView()
+            if ((viewModel.newData[.recommendedTracks]?.isEmpty) == nil) {
+                lodingIndicatorView
+            } else {
+                RecommededPlaylistView(vm: viewModel.newData[.recommendedTracks] as! [RecommendedTrackCellViewModel])
+            }
+            
         }
+    }
+    
+    private var lodingIndicatorView: LoadingIndicatorView {
+        LoadingIndicatorView(viewModel: LoadingIndicatorViewModel(displayedText: "Loading...", isLoading: true, color: Color.teal))
     }
 }
 

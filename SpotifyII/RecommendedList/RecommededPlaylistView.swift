@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct RecommededPlaylistView: View {
+    let vm: [RecommendedTrackCellViewModel]
+    init(vm: [RecommendedTrackCellViewModel]) {
+        self.vm = vm
+    }
     var body: some View {
-        Text("RecommededPlaylistView")
+        List {
+            ForEach(vm, id: \.self) { item in
+                RecommededPlaylistCellView(cellModel: item)
+            }
+        }
     }
 }
 
-struct RecommededPlaylistView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecommededPlaylistView()
-    }
-}
+//struct RecommededPlaylistView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecommededPlaylistView()
+//    }
+//}

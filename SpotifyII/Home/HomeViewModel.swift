@@ -9,13 +9,10 @@ import Foundation
 import Combine
 
 enum HomeSectionType: Hashable {
-    static func == (lhs: HomeSectionType, rhs: HomeSectionType) -> Bool {
-        lhs.title == rhs.title
-    }
     
-    case newReleases(viewModels: [NewReleasesCellViewModel])
-    case featuredPlaylists(viewModels: [FeaturedPlaylistCellViewModel])
-    case recommendedTracks(viewModels: [RecommendedTrackCellViewModel])
+    case newReleases
+    case featuredPlaylists
+    case recommendedTracks
     
     var title: String {
         switch self {
@@ -23,6 +20,10 @@ enum HomeSectionType: Hashable {
         case .featuredPlaylists: return "Featured Playlists"
         case .recommendedTracks: return "Recommended"
         }
+    }
+    
+    static func == (lhs: HomeSectionType, rhs: HomeSectionType) -> Bool {
+        lhs.title == rhs.title
     }
     
     func hash(into hasher: inout Hasher) {
@@ -36,49 +37,78 @@ class HomeViewModel: ObservableObject {
     private var disposables = Set<AnyCancellable>()
     
     var sections: [HomeSectionType] = []
-//    = [
-//        .newReleases(viewModels: []),
-//        .featuredPlaylists(viewModels: []),
-//        .recommendedTracks(viewModels: [])
-//    ]
+    var newData: [HomeSectionType: [Any]] = [:]
+    @Published var selectedSection: HomeSectionType = .newReleases
     
     init(homeFetcher: HomeFetcher) {
         self.homeFetcher = homeFetcher
+        sections = [
+            .newReleases,
+            .featuredPlaylists,
+            .recommendedTracks
+        ]
     }
     
-    func requestNewReleases(completion: @escaping ((NewReleasesResponse?) -> Void)) {
+    func requestNewReleases() {
         homeFetcher.getNewReleases()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] value in
                 guard self != nil else { return }
                 switch value {
-                case .failure:
-                    completion(nil)
+                case .failure(let error):
+                    print(error)
+                    break
                 case .finished: break
                 }
             }, receiveValue: {[weak self] resp in
                 guard self != nil else { return }
-                completion(resp)
+                self?.newData[.newReleases] = resp.albums.items.compactMap {
+                    NewReleasesCellViewModel(name: $0.name,
+                                             artworkURL: URL(string: $0.images.first?.url ?? ""),
+                                             numberOfTracks: $0.total_tracks,
+                                             artistName: $0.artists.first?.name ?? ""
+                    )}
+                self?.selectedSection = .newReleases
             })
             .store(in: &disposables)
     }
     
-    func requestFeaturedPlaylists(completion: @escaping ((FeaturedPlaylistsResponse?) -> Void)) {
+    func requestFeaturedPlaylists() {
         homeFetcher.getFeaturedPlaylists()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] value in
                 guard self != nil else { return }
                 switch value {
-                case .failure:
-                    completion(nil)
+                case .failure: break
                 case .finished: break
                 }
             }, receiveValue: {[weak self] resp in
                 guard self != nil else { return }
-                completion(resp)
+                let array = resp.playlists.items.compactMap {
+                    FeaturedPlaylistCellViewModel(
+                        name: $0.name,
+                        artworkURL:URL(string: $0.images.first?.url ?? ""),
+                        creatorName: $0.owner.display_name
+                    )}
+                self?.newData[.featuredPlaylists] = array
             })
             .store(in: &disposables)
     }
     
-    
+    func requestRecommendataions() {
+        homeFetcher.getRecommendataions()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {[weak self] value in
+                guard self != nil else { return }
+                switch value {
+                case .failure:
+                    break
+                case .finished: break
+                }
+            }, receiveValue: {[weak self] resp in
+                guard self != nil else { return }
+                self?.newData[.recommendedTracks] = resp.tracks.compactMap({RecommendedTrackCellViewModel(name: $0.name, artistName: $0.artists.first?.name ?? "-", artworkURL: URL(string: $0.album?.images.first?.url ?? ""))})
+            })
+            .store(in: &disposables)
+    }
 }
