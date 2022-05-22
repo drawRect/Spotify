@@ -21,7 +21,6 @@ struct RecommededPlaylistCellView: View {
                     .frame(width: 60, height: 60)
                     .cornerRadius(8)
                     .padding(8)
-//                    .background(Color.red)
             }
             VStack {
                 Text(cellModel.name)

@@ -14,7 +14,6 @@ struct HomeView: View {
         self.viewModel = viewModel
     }
     
-    
     var body: some View {
         VStack {
             Picker("", selection: $viewModel.selectedSection) {
@@ -34,7 +33,7 @@ struct HomeView: View {
                 case .recommendedTracks: break
                 }
             }
-            .pickerStyle(.segmented)
+            .pickerStyle(.automatic)
             
             getSelectedSectionView()
             
@@ -44,7 +43,7 @@ struct HomeView: View {
         .onAppear {
             viewModel.requestNewReleases()
             viewModel.requestFeaturedPlaylists()
-            viewModel.requestRecommendataions()
+            viewModel.requestRecommendataionsGenres()
         }
     }
     

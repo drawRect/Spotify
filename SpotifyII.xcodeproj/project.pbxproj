@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6F47192B2811520300C68E38 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F47192A2811520300C68E38 /* UserDefaultsHelper.swift */; };
 		6F4719332811BDEC00C68E38 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4719322811BDEC00C68E38 /* Constants.swift */; };
+		6F88AAD92839E9AF00309957 /* RecommededGenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F88AAD82839E9AF00309957 /* RecommededGenresResponse.swift */; };
 		6F8BFCAB280F5ED700F8E12B /* SpotifyIIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BFCAA280F5ED700F8E12B /* SpotifyIIApp.swift */; };
 		6F8BFCAD280F5ED700F8E12B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BFCAC280F5ED700F8E12B /* AuthView.swift */; };
 		6F8BFCAF280F5ED800F8E12B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F8BFCAE280F5ED800F8E12B /* Assets.xcassets */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		6F47192A2811520300C68E38 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		6F4719322811BDEC00C68E38 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6F88AAD82839E9AF00309957 /* RecommededGenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommededGenresResponse.swift; sourceTree = "<group>"; };
 		6F8BFCA7280F5ED700F8E12B /* SpotifyII.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyII.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8BFCAA280F5ED700F8E12B /* SpotifyIIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyIIApp.swift; sourceTree = "<group>"; };
 		6F8BFCAC280F5ED700F8E12B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				6FB460C92821664B00E1BC10 /* NewReleasesResponse.swift */,
 				6FB4F11E2825B88800F59878 /* FeaturedPlaylistsResponse.swift */,
 				6FC7CD1F2838EB9E0016F705 /* RecommendationsResponse.swift */,
+				6F88AAD82839E9AF00309957 /* RecommededGenresResponse.swift */,
 				6FB4F1202825B8A800F59878 /* Playlist.swift */,
 				6FB460CB282172CC00E1BC10 /* APIImage.swift */,
 				6FB460CC282172CC00E1BC10 /* Artist.swift */,
@@ -493,6 +496,7 @@
 				6FB460C82821656D00E1BC10 /* HomeFetcher.swift in Sources */,
 				6F8BFCE1280F722700F8E12B /* MyError.swift in Sources */,
 				6FB87A712823DD880061DE68 /* RecommendedTrackCellViewModel.swift in Sources */,
+				6F88AAD92839E9AF00309957 /* RecommededGenresResponse.swift in Sources */,
 				6FB87A6D2823D7AF0061DE68 /* NewReleasesCellViewModel.swift in Sources */,
 				6FFF4A31282ECCDA0069A583 /* Extension+Binding.swift in Sources */,
 				6FA73E6F2811E4D100613BB8 /* ContentView.swift in Sources */,

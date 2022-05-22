@@ -95,8 +95,8 @@ class HomeViewModel: ObservableObject {
             .store(in: &disposables)
     }
     
-    func requestRecommendataions() {
-        homeFetcher.getRecommendataions()
+    private func requestRecommendataions(genres: Set<String>) {
+        homeFetcher.getRecommendations(genres: genres)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] value in
                 guard self != nil else { return }
@@ -108,6 +108,31 @@ class HomeViewModel: ObservableObject {
             }, receiveValue: {[weak self] resp in
                 guard self != nil else { return }
                 self?.newData[.recommendedTracks] = resp.tracks.compactMap({RecommendedTrackCellViewModel(name: $0.name, artistName: $0.artists.first?.name ?? "-", artworkURL: URL(string: $0.album?.images.first?.url ?? ""))})
+            })
+            .store(in: &disposables)
+    }
+    
+    func requestRecommendataionsGenres() {
+        homeFetcher.getRecommendedGenres()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {[weak self] value in
+                guard self != nil else { return }
+                switch value {
+                case .failure:
+                    break
+                case .finished: break
+                }
+            }, receiveValue: {[weak self] resp in
+                guard self != nil else { return }
+                let genres = resp.genres
+                var seeds = Set<String>()
+                while seeds.count < 5 {
+                  if let random = genres.randomElement() {
+                    seeds.insert(random)
+                  }
+                }
+                
+                self?.requestRecommendataions(genres: seeds)
             })
             .store(in: &disposables)
     }

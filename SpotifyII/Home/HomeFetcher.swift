@@ -11,7 +11,8 @@ import Combine
 protocol HomeFetchable {
     func getNewReleases() -> AnyPublisher<NewReleasesResponse, MyError>
     func getFeaturedPlaylists() -> AnyPublisher<FeaturedPlaylistsResponse, MyError>
-    func getRecommendataions() -> AnyPublisher<RecommendationsResponse, MyError>
+    func getRecommendedGenres() -> AnyPublisher<RecommededGenresResponse, MyError>
+    func getRecommendations(genres: Set<String>) -> AnyPublisher<RecommendationsResponse, MyError>
 }
 
 class HomeFetcher {
@@ -56,8 +57,14 @@ extension HomeFetcher: HomeFetchable {
         requestData(with: request(with: featuredPlaylistsEndPoint))
     }
     
-    func getRecommendataions() -> AnyPublisher<RecommendationsResponse, MyError> {
-        requestData(with: request(with: recomendedGenreEndPoint))
+    func getRecommendedGenres() -> AnyPublisher<RecommededGenresResponse, MyError> {
+        requestData(with: request(with:  "https://api.spotify.com/v1" + "/recommendations/available-genre-seeds"))
+    }
+    
+    func getRecommendations(genres: Set<String>) -> AnyPublisher<RecommendationsResponse, MyError> {
+        let seeds = genres.joined(separator: ",")
+        let string =  "https://api.spotify.com/v1" + "/recommendations?limit=40&seed_genres=\(seeds)"
+        return requestData(with: request(with: string))
     }
     
     private func requestData<T>(with request: URLRequest?) -> AnyPublisher<T, MyError> where T: Decodable {
