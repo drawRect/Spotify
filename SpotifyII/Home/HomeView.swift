@@ -67,7 +67,6 @@ struct HomeView: View {
             } else {
                 RecommededPlaylistView(vm: viewModel.newData[.recommendedTracks] as! [RecommendedTrackCellViewModel])
             }
-            
         }
     }
     

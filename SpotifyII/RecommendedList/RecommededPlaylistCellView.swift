@@ -15,23 +15,26 @@ struct RecommededPlaylistCellView: View {
     }
     var body: some View {
         HStack {
-            HStack {
+            VStack {
                 AnimatedImage(url: cellModel.artworkURL)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60, height: 60)
                     .cornerRadius(8)
                     .padding(8)
             }
-            VStack {
+            VStack(alignment: .leading) {
                 Text(cellModel.name)
                     .font(.system(size: 18, weight: .regular))
+                    .lineLimit(2)
                 Text(cellModel.artistName)
                     .font(.system(size: 15, weight: .thin))
+                    .lineLimit(1)
             }
         }
+        .frame(width: (UIScreen.main.bounds.width-(2*50)), alignment: .leading)
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(8)
-        .padding(4)
+        .padding(5)
     }
 }
 

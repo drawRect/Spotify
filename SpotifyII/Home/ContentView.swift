@@ -39,8 +39,8 @@ struct ContentView: View {
             LibraryView()
                 .tabItem { Label("Library", systemImage: "building.columns") }
                 .tag(TabBarItem.library)
-            
         }
+        .accentColor(Color(hex: "#1ED760"))
         .onAppear {
             let appearance = UITabBarAppearance()
             
@@ -66,9 +66,9 @@ struct ContentView: View {
     }
     
     private func performSync() {
-//        syncManager.services = authentication.configureServices()
-//        syncManager.initializeSyncTimer()
-//        syncManager.execute()
+        //        syncManager.services = authentication.configureServices()
+        //        syncManager.initializeSyncTimer()
+        //        syncManager.execute()
     }
 }
 

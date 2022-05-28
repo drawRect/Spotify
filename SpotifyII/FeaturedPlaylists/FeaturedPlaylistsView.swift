@@ -13,21 +13,18 @@ struct FeaturedPlaylistsView: View {
         self.vm = vm
     }
     private var columns = [
-        GridItem(.adaptive(minimum: 200), spacing: 0),
-        GridItem(.adaptive(minimum: 200), spacing: 0),
-        GridItem(.adaptive(minimum: 200), spacing: 0)
+        GridItem(.adaptive(minimum: (UIScreen.main.bounds.width*0.5)), spacing: 0),
+        GridItem(.adaptive(minimum: (UIScreen.main.bounds.width*0.5)), spacing: 0),
     ]
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
-                LazyVGrid(
-                    columns: columns,
-                    spacing: 0
-                ) {
-                    ForEach(vm, id: \.self) { 
-                        FeaturedPlaylistCellView(cellModel: $0)
-                    }
+        ScrollView {
+            LazyVGrid(
+                columns: columns,
+                spacing: 0
+            ) {
+                ForEach(vm, id: \.self) {
+                    FeaturedPlaylistCellView(cellModel: $0)
                 }
             }
         }

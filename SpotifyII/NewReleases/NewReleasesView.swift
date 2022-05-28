@@ -13,21 +13,18 @@ struct NewReleasesView: View {
         self.newReleaseVM = newReleaseVM
     }
     private var columns = [
-        GridItem(.adaptive(minimum: 200), spacing: 0),
-        GridItem(.adaptive(minimum: 200), spacing: 0),
-        GridItem(.adaptive(minimum: 200), spacing: 0)
+        GridItem(.adaptive(minimum: (UIScreen.main.bounds.width*0.5)), spacing: 0),
+        GridItem(.adaptive(minimum: (UIScreen.main.bounds.width*0.5)), spacing: 0),
     ]
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
-                LazyVGrid(
-                    columns: columns,
-                    spacing: 0
-                ) {
-                    ForEach(newReleaseVM, id: \.self) { model in
-                        NewReleaseCellView(cellModel: model)
-                    }
+        ScrollView {
+            LazyVGrid(
+                columns: columns,
+                spacing: 0
+            ) {
+                ForEach(newReleaseVM, id: \.self) { model in
+                    NewReleaseCellView(cellModel: model)
                 }
             }
         }

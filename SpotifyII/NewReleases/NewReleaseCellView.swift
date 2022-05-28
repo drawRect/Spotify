@@ -28,17 +28,19 @@ struct NewReleaseCellView: View {
                 HStack {
                     VStack(alignment: .center, spacing: 8) {
                         Text(cellModel.name)
-                            .font(.system(size: 20, weight: .semibold))
-                            .lineLimit(1)
+                            .font(.system(size: 15, weight: .medium))
+                            .lineLimit(2)
                         Text(cellModel.artistName)
-                            .font(.system(size: 18, weight: .light))
+                            .font(.system(size: 13, weight: .light))
                         Text("Tracks: \(cellModel.numberOfTracks)")
-                            .font(.system(size: 18, weight: .thin))
+                            .font(.system(size: 12, weight: .thin))
                     }
+                    .padding(2)
                     .lineLimit(2)
                 }
             }
         }
+        .frame(width: (UIScreen.main.bounds.width*0.5)-20, height: (UIScreen.main.bounds.height*0.3))
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(8)
         .padding(10)
@@ -49,23 +51,4 @@ struct NewReleaseCellView_Previews: PreviewProvider {
     static var previews: some View {
         NewReleaseCellView(cellModel: NewReleasesCellViewModel(name: "Hello", artworkURL: URL(string: "https://i.scdn.co/image/ab67616d0000b2732010657a03a64e77c2538491")!, numberOfTracks: 5, artistName: "Adele"))
     }
-}
-
-
-extension UIImage {
-    func getPixelColor(pos: CGPoint) -> UIColor {
-
-        let pixelData = self.cgImage!.dataProvider!.data
-        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-
-        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
-
-        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
-        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
-        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
-        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-
-        return UIColor(red: r, green: g, blue: b, alpha: a)
-    }
-
 }

@@ -22,10 +22,13 @@ struct FeaturedPlaylistCellView: View {
                 .padding(8)
             
             Text(cellModel.name)
-                .font(.system(size: 18, weight: .regular))
+                .font(.system(size: 15, weight: .regular))
+                .lineLimit(2)
             Text(cellModel.creatorName)
-                .font(.system(size: 15, weight: .thin))
+                .font(.system(size: 13, weight: .thin))
+                .lineLimit(1)
         }
+        .frame(width: (UIScreen.main.bounds.width*0.5)-20, height: (UIScreen.main.bounds.height*0.25))
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(8)
         .padding(4)

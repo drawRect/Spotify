@@ -16,7 +16,9 @@ struct RecommededPlaylistView: View {
         List {
             ForEach(vm, id: \.self) { item in
                 RecommededPlaylistCellView(cellModel: item)
+                    .listRowSeparator(.hidden)
             }
+            .environment(\.defaultMinListRowHeight, 90)
         }
     }
 }
